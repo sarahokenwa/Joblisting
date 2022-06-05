@@ -1,30 +1,30 @@
 const router = require('express').Router();
-const Job = require('../models/jobs');
+const Video = require('../models/videos');
 
 //Get all jobs
 router.route('/').get((req, res) => {
-  Job.find()
-    .then((jobs) => {
-      res.json(jobs);
+  Video.find()
+    .then((videos) => {
+      res.json(videos);
     })
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
 //Add new jobs
 router.route('/add').post((req, res) => {
-  const { title, company, location, image, category, role } = req.body;
-  const newJob = new Job({
+  const { title, name, category, video_thumbnail,  video_length,  rating } = req.body;
+  const newVideo = new Video({
     title,
-    role,
-    image,
+    name,
     category,
-    company,
-    location,
+    video_thumbnail,
+    video_length,
+    rating,
   });
 
-  newJob
+  newVideo
     .save()
-    .then(() => res.json('Job added'))
+    .then(() => res.json('Video added'))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 

@@ -10,20 +10,20 @@ app.use(cors());
 //Database
 const mongoose = require('mongoose');
 
-const uri = 'mongodb://127.0.0.1:27017/job-finder';
+const uri = 'mongodb://localhost:27017/QuickLearn';
 mongoose.connect(uri, { useNewUrlParser: true });
 
 const connection = mongoose.connection;
 connection.once('open', () => console.log('MongoDB connected'));
 
 app.use(express.json());
-const jobRoute = require('./routes/jobs');
+const videoRoute = require('./routes/videos');
 
 app.get('/', (req, res) => {
   res.send('Hello World');
   console.log(req.body);
 });
 
-app.use('/jobs', jobRoute);
+app.use('/videos', videoRoute);
 
 app.listen(8080, () => console.log('Server is up and running on port 8080'));
